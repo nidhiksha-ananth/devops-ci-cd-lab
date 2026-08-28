@@ -33,12 +33,12 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/devops-ci-cd-lab:latest .
-      
+          docker build -t devops-ci-cd-lab:latest .
+
       - name: Scan Docker image
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: '${{ secrets.DOCKERHUB_USERNAME }}/devops-ci-cd-lab:latest'
+          image-ref: 'devops-ci-cd-lab:latest'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
@@ -49,7 +49,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
+      - name: Tag Docker image
+        run: |
+          docker tag devops-ci-cd-lab:latest ${{ secrets.DOCKERHUB_USERNAME }}/devops-ci-cd-lab:latest
+
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/devops-ci-cd-lab:latest
