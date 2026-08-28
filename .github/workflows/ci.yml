@@ -32,4 +32,4 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t devops-ci-cd-lab .0
+          docker build -t devops-ci-cd-lab .
