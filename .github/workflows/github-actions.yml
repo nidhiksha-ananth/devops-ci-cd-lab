@@ -1,0 +1,12 @@
+name: DevOps Pipeline
+
+on:
+  push:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: GitHub Actions
+        run: echo "Hello from GitHub Actions!"
